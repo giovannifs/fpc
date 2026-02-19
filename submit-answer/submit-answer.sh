@@ -1,7 +1,11 @@
 #!/bin/bash
 
 SERVER_ADRESS=150.165.85.31
+PORT=25000
 SERVER_USER="aluno"
+DISCIPLINE="leda"
+SEMESTER="2025-2"
+CURRENT_ACTIVITY="prova1"
 
 TYPE=$1
 FILE_PATH=$2
@@ -12,10 +16,10 @@ if [ ! -f $FILE_PATH ]; then
    exit 1
 fi
 
-if [ $TYPE = "prova1" ] || [ $TYPE = "prova2" ] 
+if [ $TYPE = $CURRENT_ACTIVITY ] 
 then
-        echo "Submiting for $TYPE: $FILE_PATH"
-	scp $FILE_PATH $SERVER_USER@$SERVER_ADRESS:/home/$SERVER_USER/2025-2/$TYPE/
+        echo "Submiting $TYPE: $FILE_PATH"
+	scp -P $PORT $FILE_PATH $SERVER_USER@$SERVER_ADRESS:/home/$SERVER_USER/$DISCIPLINE/$SEMESTER/$TYPE/
 
 else 
 	echo "ERROR: Invalid test option!"
